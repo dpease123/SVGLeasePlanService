@@ -10,6 +10,7 @@ namespace SVGLeasePlanService
     {
         static void Main(string[] args)
         {
+            ConfigureService.Configure();
         }
     }
 }
