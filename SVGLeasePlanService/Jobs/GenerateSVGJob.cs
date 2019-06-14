@@ -13,7 +13,7 @@ namespace SVGLeasePlanService.Jobs
         public async Task Execute(IJobExecutionContext context)
         {
 
-            log.Info("Hello from GenerateSVGJob job!");
+            log.Info("Hello from GenerateSVGJob job! This where the work happens...");
            
         }
     }
