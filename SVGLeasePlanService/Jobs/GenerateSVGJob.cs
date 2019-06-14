@@ -14,9 +14,14 @@ namespace SVGLeasePlanService.Jobs
         private readonly LDBRepository _repo = new LDBRepository();
         public async Task Execute(IJobExecutionContext context)
         {
-            var data = _repo.GetBuilding("CCK");
             log.Info("Hello from GenerateSVGJob job! This where the work happens...");
-            log.Info("ID: " + data.BldgId);
+            var FileName = "CCK2";
+            var x = Utilities.GetCenterFloorFromFileName(FileName);
+            var Building = _repo.GetBuilding(x.CtrAbbr);
+            var floor = int.Parse(x.Floor);
+
+            var polygons = _repo.GetPolygonsByCenterandFloor(Building.BldgId, floor);
+           
         }
     }
 }

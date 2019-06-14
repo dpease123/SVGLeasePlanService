@@ -12,8 +12,14 @@ namespace SVGLeasePlanService.Data
         private readonly LDBContext _dbContext = new LDBContext();
         public BldgScale GetBuilding(string Id)
         {
-            var row = _dbContext.BldgScale.Where(x => x.stAbbrev == Id).FirstOrDefault();
-            return row;
+            return _dbContext.BldgScale.Where(x => x.stAbbrev == Id).FirstOrDefault();
+           
+        }
+
+        public List<Polygon> GetPolygonsByCenterandFloor(string BldgId, int Floor)
+        {
+            return _dbContext.Polygon.Where(x => x.BldgId == BldgId && x.FloorNO == Floor).ToList();
+           
         }
     }
 }

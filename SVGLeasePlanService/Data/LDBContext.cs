@@ -16,6 +16,7 @@ namespace SVGLeasePlanService
         }
 
         public DbSet<BldgScale> BldgScale { get; set; }
+        public DbSet<Polygon> Polygon { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -23,8 +24,15 @@ namespace SVGLeasePlanService
 
             modelBuilder.Entity<BldgScale>()
            .ToTable("tblBldgScale");
-                       
+
+            modelBuilder.Entity<Polygon>()
+           .ToTable("tblPowerBIPolygons");
+
+
             
+
+
+
         }
     }
 }

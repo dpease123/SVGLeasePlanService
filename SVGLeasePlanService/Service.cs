@@ -53,7 +53,7 @@ namespace SVGLeasePlanService
                     .WithIdentity("trigger1", "group1")
                     .StartNow()
                     .WithSimpleSchedule(x => x
-                        .WithIntervalInSeconds(10)
+                        .WithIntervalInHours(24)
                         .RepeatForever())
                     .Build();
 
@@ -61,7 +61,7 @@ namespace SVGLeasePlanService
                 await scheduler.ScheduleJob(job, trigger);
 
                 // some sleep to show what's happening
-                await Task.Delay(TimeSpan.FromSeconds(7));
+                await Task.Delay(TimeSpan.FromSeconds(1));
 
                 // and last shut down the scheduler when you are ready to close your program
                 await scheduler.Shutdown();
