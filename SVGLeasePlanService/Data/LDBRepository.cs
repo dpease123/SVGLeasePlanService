@@ -16,10 +16,21 @@ namespace SVGLeasePlanService.Data
            
         }
 
-        public List<Polygon> GetPolygonsByCenterandFloor(string BldgId, int Floor)
+        public List<Space> GetPolygonsByCenterandFloor(string CntrAbbr, int Floor)
         {
-            return _dbContext.Polygon.Where(x => x.BldgId == BldgId && x.FloorNO == Floor).ToList();
-           
+            var spaces =  from p in _dbContext.Polygon
+                            where p.CtrAbbr == CntrAbbr && p.FloorNO == Floor
+                            group p by p.SuitId into g
+                   select new Space
+                   {
+                       SuitId = g.Key,
+                       Polygons = g.ToList()
+                   };
+            return spaces.ToList(); 
         }
+
+        //   return from p in _dbContext.Polygon.Where(x => x.CtrAbbr == CntrAbbr && x.FloorNO == Floor).GroupBy(o => o.SuitId).ToList();
+
+        
     }
 }
