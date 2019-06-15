@@ -24,6 +24,7 @@ namespace SVGLeasePlanService.Jobs
             //var Building = _repo.GetBuilding(x.CtrAbbr);
             var floor = int.Parse(x.Floor);
             var start = FileManager.TodaysPNGtobeCovertedtoSVG();
+            //FIx this call to use the return from Utilities.GetCenterFloorFromFileName(FileName);
             var spaces = _repo.GetPolygonsByCenterandFloor("CCK", 2);
             sb.AppendLine(start.ToString());
             foreach (var s in spaces)
