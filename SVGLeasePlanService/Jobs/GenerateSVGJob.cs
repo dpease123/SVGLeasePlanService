@@ -28,9 +28,16 @@ namespace SVGLeasePlanService.Jobs
             foreach (var s in spaces)
             {
 
-               sb.AppendLine($@"<polygon id=""_x31_224 - {s.SuitId}"" title=""{s.SuitId} "" />");
+               sb.AppendLine($@"<polygon id=""_x31_224 - {s.SuitId}"" title=""{s.SuitId} points="" ");
+                foreach (var p in s.Polygons)
+                {
+                    sb.AppendLine($"{p.X}, {p.Y}");
+                }
+                sb.Append("\"");
+                sb.Append("/>");
 
             }
+            sb.AppendLine("</svg>");
 
             Console.WriteLine(sb.ToString());
 
