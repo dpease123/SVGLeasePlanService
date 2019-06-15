@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,7 +40,8 @@ namespace SVGLeasePlanService.Jobs
             }
             sb.AppendLine("</svg>");
 
-            Console.WriteLine(sb.ToString());
+            //Console.WriteLine(sb.ToString());
+            File.WriteAllText(@"C:\temp\plans\output\CCK2.svg", sb.ToString());
 
 
         }
