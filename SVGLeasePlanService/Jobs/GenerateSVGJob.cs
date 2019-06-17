@@ -15,13 +15,14 @@ namespace SVGLeasePlanService.Jobs
 
         public async Task Execute(IJobExecutionContext context)
         {
-            log.Info("Hello from GenerateSVGJob job! This where the work happens...");
-            SVGBuilder SVGBuilder = new SVGBuilder();
+            SVGWorker SVGWorker = new SVGWorker();
             try
             {
-                log.Info("GenerateSVGJob starting...");
-                await SVGBuilder.Build();
-                log.Info("GenerateSVGJob done");
+                log.Info("-----------------------------------------------------------------------------------------------------");
+                log.Info("GenerateSVGJob Starting...");
+                await SVGWorker.Work();
+                log.Info("GenerateSVGJob Done!");
+                log.Info("-----------------------------------------------------------------------------------------------------");
             }
             catch(Exception ex)
             {

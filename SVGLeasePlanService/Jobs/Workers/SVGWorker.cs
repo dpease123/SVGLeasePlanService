@@ -10,13 +10,13 @@ using System.Configuration;
 
 namespace SVGLeasePlanService
 {
-    public class SVGBuilder
+    public class SVGWorker
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private readonly LDBRepository _repo = new LDBRepository();
         StringBuilder sb = new StringBuilder();
         private static string BldgId;
-        public async Task Build()
+        public async Task Work()
         {
 
             var PNGInputFolder = ConfigurationManager.AppSettings["PNGInputFolder"];
@@ -31,7 +31,7 @@ namespace SVGLeasePlanService
 
                 if (FloorSpaces.Count == 0)
                 {
-                    log.Info("Skipping SVG floor plan for: " + x.CtrAbbr + "-" + "FloorNo: " + x.Floor + " | PNG File: " + png);
+                    log.Info("***Skipping No polygon data found: " + x.CtrAbbr + "-" + "FloorNo: " + x.Floor + " | PNG File: " + png);
                     continue;
                 }
 
