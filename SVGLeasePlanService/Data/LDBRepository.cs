@@ -1,4 +1,5 @@
-﻿using SVGLeasePlanService.Data.Models;
+﻿using SVGLeasePlanService.Data.DTO;
+using SVGLeasePlanService.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -20,9 +21,5 @@ namespace SVGLeasePlanService.Data
                         .Select(g => new Space { SuitId = g.Key, Polygons = g.ToList() })
                         .ToListAsync();
         }
-
-        //   return from p in _dbContext.Polygon.Where(x => x.CtrAbbr == CntrAbbr && x.FloorNO == Floor).GroupBy(o => o.SuitId).ToList();
-
-        
     }
 }

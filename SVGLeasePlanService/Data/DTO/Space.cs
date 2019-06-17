@@ -1,10 +1,11 @@
-﻿using System;
+﻿using SVGLeasePlanService.Data.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SVGLeasePlanService.Data.Models
+namespace SVGLeasePlanService.Data.DTO
 {
     public class Space
     {
