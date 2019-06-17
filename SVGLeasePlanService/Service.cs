@@ -7,6 +7,7 @@ using Quartz;
 using Quartz.Impl;
 using System.Collections.Specialized;
 using SVGLeasePlanService.Jobs;
+using System.Configuration;
 
 namespace SVGLeasePlanService
 {
@@ -53,7 +54,7 @@ namespace SVGLeasePlanService
                     .WithIdentity("trigger1", "group1")
                     .StartNow()
                     .WithSimpleSchedule(x => x
-                        .WithIntervalInHours(24)
+                        .WithIntervalInHours(int.Parse(ConfigurationManager.AppSettings["JobnIntervalHours"]))
                         .RepeatForever())
                     .Build();
 
