@@ -17,6 +17,8 @@ namespace SVGLeasePlanService
         StringBuilder sb = new StringBuilder();
         public async Task Build()
         {
+
+            //Test for mike
             var PNGInputFolder = ConfigurationManager.AppSettings["PNGInputFolder"];
             var SVGOutputFolder = ConfigurationManager.AppSettings["SVGOutputFolder"];
             var pngFiles = Directory.GetFiles(@PNGInputFolder, "*.png");
