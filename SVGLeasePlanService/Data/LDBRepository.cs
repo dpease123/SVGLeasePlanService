@@ -10,12 +10,7 @@ namespace SVGLeasePlanService.Data
     public class LDBRepository
     {
         private readonly LDBContext _dbContext = new LDBContext();
-        public BldgScale GetBuilding(string Id)
-        {
-            return _dbContext.BldgScale.Where(x => x.stAbbrev == Id).FirstOrDefault();
-           
-        }
-
+       
         public List<Space> GetPolygonsByCenterandFloor(string CntrAbbr, int Floor)
         {
             var spaces =  from p in _dbContext.Polygon
