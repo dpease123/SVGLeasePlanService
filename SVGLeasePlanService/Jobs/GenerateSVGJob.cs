@@ -19,7 +19,9 @@ namespace SVGLeasePlanService.Jobs
             SVGBuilder SVGBuilder = new SVGBuilder();
             try
             {
-                SVGBuilder.Build();
+                log.Info("GenerateSVGJob starting...");
+                await SVGBuilder.Build();
+                log.Info("GenerateSVGJob done");
             }
             catch(Exception ex)
             {

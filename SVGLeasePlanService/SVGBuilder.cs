@@ -15,7 +15,7 @@ namespace SVGLeasePlanService
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private readonly LDBRepository _repo = new LDBRepository();
         StringBuilder sb = new StringBuilder();
-        public void Build()
+        public async Task Build()
         {
             var PNGInputFolder = ConfigurationManager.AppSettings["PNGInputFolder"];
             var SVGOutputFolder = ConfigurationManager.AppSettings["SVGOutputFolder"];
@@ -25,7 +25,7 @@ namespace SVGLeasePlanService
                 GetCntrAbbrandFloorFromPNGName(png, out string PNGName, out dynamic x);
 
 
-                var FloorSpaces = _repo.GetPolygonsByCenterandFloor(x.CtrAbbr, x.Floor);
+                var FloorSpaces = await _repo.GetPolygonsByCenterandFloor(x.CtrAbbr, x.Floor);
 
                 if (FloorSpaces.Count == 0)
                 {
@@ -34,7 +34,7 @@ namespace SVGLeasePlanService
                 }
 
                 log.Info("Building SVG floor plan for: " + x.CtrAbbr + "-" + "FloorNo: " + x.Floor + " | PNG File: " + png);
-                var stream = File.OpenText(png).ReadToEnd();
+                var stream = await File.OpenText(png).ReadToEndAsync();
                 sb.AppendLine($@"<svg version = ""1.1"" id=""Map"" class=""gen-by-synoptic-designer"" xmlns=""http://www.w3.org/2000/svg"" xmlns:xlink=""http://www.w3.org/1999/xlink"" viewBox=""0 0 4200 3000"" xml:space=""preserve""><image width = ""4200"" height=""3000"" xlink:href=""data:image/png;base64,{stream}"" />");
 
                 foreach (var s in FloorSpaces)
