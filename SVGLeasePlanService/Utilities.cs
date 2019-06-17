@@ -17,7 +17,7 @@ namespace SVGLeasePlanService
 
             dynamic expando = new ExpandoObject();
             expando.CtrAbbr = name.Substring(0, 3);
-            expando.Floor = name.Substring(3);
+            expando.Floor = int.Parse(name.Substring(3));
             return expando;
         }
     }
