@@ -45,8 +45,8 @@ namespace SVGLeasePlanService
 
                 foreach (var s in Floorpolygons)
                 {
-
-                    sb.AppendLine($@"<polygon id=""{x.CtrAbbr}-{s.SuitId}"" title=""{s.SuitId}"" points="" ");
+                    sb.AppendLine($@"<polygon id=""{x.CtrAbbr}-{BldgId}"" title=""{s.SuitId}"" points="" ");
+                    //sb.AppendLine($@"<polygon id=""{x.CtrAbbr}-{s.SuitId}"" title=""{s.SuitId}"" points="" ");
                     foreach (var p in s.Polygons)
                     {
                         sb.AppendLine($"{p.X.ToString("N0").Replace(",", "")}, {p.Y.ToString("N0").Replace(",", "")}");
