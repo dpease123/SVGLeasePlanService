@@ -59,13 +59,13 @@ namespace SVGLeasePlanService
                 //    .Build();
 
                 // define the job and tie it to our HelloJob class
-                IJobDetail job2 = JobBuilder.Create<LoadZipFilesJob>()
-                    .WithIdentity("ZipJob", "group2")
+                IJobDetail job2 = JobBuilder.Create<LoadFWIPlayerLogsJob>()
+                    .WithIdentity("ZipJob", "ZipJobGroup")
                     .Build();
 
                 // Trigger the job to run now, and then repeat every 10 seconds
                 ITrigger trigger2 = TriggerBuilder.Create()
-                    .WithIdentity("trigger2", "group2")
+                    .WithIdentity("ZipJobTrigger", "ZipJobGroup")
                     .StartNow()
                     .WithSimpleSchedule(x => x
                         .WithIntervalInHours(int.Parse(ConfigurationManager.AppSettings["JobnIntervalHours"]))

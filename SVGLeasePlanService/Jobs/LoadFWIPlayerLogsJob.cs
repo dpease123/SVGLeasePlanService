@@ -8,13 +8,13 @@ using SVGLeasePlanService.Jobs.Workers;
 
 namespace SVGLeasePlanService.Jobs
 {
-    public class LoadZipFilesJob : IJob
+    public class LoadFWIPlayerLogsJob : IJob
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public async Task Execute(IJobExecutionContext context)
         {
-            LoadZipFilesWorker LoadZipFilesWorker = new LoadZipFilesWorker();
+            LoadFWIPlayerLogsWorker LoadZipFilesWorker = new LoadFWIPlayerLogsWorker();
             try
             {
                 log.Info("-----------------------------------------------------------------------------------------------------");

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SVGLeasePlanService.Jobs.Workers
 {
-    public class LoadZipFilesWorker
+    public class LoadFWIPlayerLogsWorker
     {
         FWIContext _dbContect = new FWIContext();
         public async Task Work()
