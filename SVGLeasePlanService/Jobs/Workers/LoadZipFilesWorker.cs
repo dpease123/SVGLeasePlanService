@@ -14,22 +14,29 @@ namespace SVGLeasePlanService.Jobs.Workers
         FWIContext _dbContect = new FWIContext();
         public async Task Work()
         {
-            var zipPath = (@"C:\Temp\UnZipSource");
-            var extractPath = (@"C:\Temp\UnZipTarget");
+            var zipPath = PlayerLogZipFileFolder();
+            var extractPath = UnZipPlayerLogTargetFolder();
 
-            var di = new DirectoryInfo(@extractPath);
+            DeleteExistingUnzippedLogFiles(extractPath);
 
-            foreach (FileInfo file in di.GetFiles())
-            {
-                file.Delete();
-            }
+            UnZipPlayerLogs(zipPath, extractPath);
 
-            string[] zips = Directory.GetFiles(zipPath);
-            foreach (var z in zips)
-            {
-                ZipFile.ExtractToDirectory(z, extractPath);
-            }
+            LoadPlayerLogXMLData(extractPath);
 
+        }
+
+        private static string UnZipPlayerLogTargetFolder()
+        {
+            return (@"C:\Temp\UnZipTarget");
+        }
+
+        private static string PlayerLogZipFileFolder()
+        {
+            return (@"C:\Temp\UnZipSource");
+        }
+
+        private static void LoadPlayerLogXMLData(string extractPath)
+        {
             var logs = Directory.GetFiles(@extractPath, "*.log");
             using (var ctx = new FWIContext())
             {
@@ -39,10 +46,28 @@ namespace SVGLeasePlanService.Jobs.Workers
                     var sql = $@"INSERT INTO PLayerLogXML(XMLData, LoadedDateTime, Name)
                         SELECT CONVERT(XML, BulkColumn) AS BulkColumn, GETDATE(),'{fi.Name}' 
                         FROM OPENROWSET(BULK '{l}', SINGLE_BLOB) AS x;";
-                   ctx.Database.ExecuteSqlCommand(sql);
+                    ctx.Database.ExecuteSqlCommand(sql);
                 }
             }
+        }
 
+        private static void UnZipPlayerLogs(string zipPath, string extractPath)
+        {
+            string[] zips = Directory.GetFiles(zipPath);
+            foreach (var z in zips)
+            {
+                ZipFile.ExtractToDirectory(z, extractPath);
+            }
+        }
+
+        private static void DeleteExistingUnzippedLogFiles(string extractPath)
+        {
+            var di = new DirectoryInfo(@extractPath);
+
+            foreach (FileInfo file in di.GetFiles())
+            {
+                file.Delete();
+            }
         }
     }
 }
