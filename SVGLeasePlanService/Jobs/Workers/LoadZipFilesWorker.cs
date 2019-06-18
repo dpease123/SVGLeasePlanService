@@ -17,6 +17,13 @@ namespace SVGLeasePlanService.Jobs.Workers
             var zipPath = (@"C:\Temp\UnZipSource");
             var extractPath = (@"C:\Temp\UnZipTarget");
 
+            var di = new DirectoryInfo(@extractPath);
+
+            foreach (FileInfo file in di.GetFiles())
+            {
+                file.Delete();
+            }
+
             string[] zips = Directory.GetFiles(zipPath);
             foreach (var z in zips)
             {
