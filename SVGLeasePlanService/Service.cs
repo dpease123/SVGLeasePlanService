@@ -45,13 +45,27 @@ namespace SVGLeasePlanService
                 await scheduler.Start();
 
                 // define the job and tie it to our HelloJob class
-                IJobDetail job = JobBuilder.Create<GenerateSVGJob>()
-                    .WithIdentity("SVGJob", "group1")
+                //IJobDetail job = JobBuilder.Create<GenerateSVGJob>()
+                //    .WithIdentity("SVGJob", "group1")
+                //    .Build();
+
+                //// Trigger the job to run now, and then repeat every 10 seconds
+                //ITrigger trigger = TriggerBuilder.Create()
+                //    .WithIdentity("trigger1", "group1")
+                //    .StartNow()
+                //    .WithSimpleSchedule(x => x
+                //        .WithIntervalInHours(int.Parse(ConfigurationManager.AppSettings["JobnIntervalHours"]))
+                //        .RepeatForever())
+                //    .Build();
+
+                // define the job and tie it to our HelloJob class
+                IJobDetail job2 = JobBuilder.Create<LoadZipFilesJob>()
+                    .WithIdentity("ZipJob", "group2")
                     .Build();
 
                 // Trigger the job to run now, and then repeat every 10 seconds
-                ITrigger trigger = TriggerBuilder.Create()
-                    .WithIdentity("trigger1", "group1")
+                ITrigger trigger2 = TriggerBuilder.Create()
+                    .WithIdentity("trigger2", "group2")
                     .StartNow()
                     .WithSimpleSchedule(x => x
                         .WithIntervalInHours(int.Parse(ConfigurationManager.AppSettings["JobnIntervalHours"]))
@@ -59,7 +73,8 @@ namespace SVGLeasePlanService
                     .Build();
 
                 // Tell quartz to schedule the job using our trigger
-                await scheduler.ScheduleJob(job, trigger);
+                //await scheduler.ScheduleJob(job, trigger);
+                await scheduler.ScheduleJob(job2, trigger2);
 
                 // some sleep to show what's happening
                 await Task.Delay(TimeSpan.FromSeconds(1));
