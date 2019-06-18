@@ -18,9 +18,9 @@ namespace SVGLeasePlanService.Jobs
             try
             {
                 log.Info("-----------------------------------------------------------------------------------------------------");
-                log.Info("LoadZipFilesJob Starting...");
+                log.Info("LoadFWIPlayerLogsJob Starting...");
                 await LoadFWIPlayerLogsWorker.Work();
-                log.Info("LoadZipFilesJob Done!");
+                log.Info("LoadFWIPlayerLogsJob Done!");
                 log.Info("-----------------------------------------------------------------------------------------------------");
             }
             catch (Exception ex)
