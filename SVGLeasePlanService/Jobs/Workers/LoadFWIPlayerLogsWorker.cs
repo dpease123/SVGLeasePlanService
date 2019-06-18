@@ -11,7 +11,6 @@ namespace SVGLeasePlanService.Jobs.Workers
 {
     public class LoadFWIPlayerLogsWorker
     {
-        FWIContext _dbContect = new FWIContext();
         public async Task Work()
         {
             var zipPath = PlayerLogZipFileFolder();
