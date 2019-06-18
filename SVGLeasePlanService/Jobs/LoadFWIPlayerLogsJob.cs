@@ -14,12 +14,12 @@ namespace SVGLeasePlanService.Jobs
 
         public async Task Execute(IJobExecutionContext context)
         {
-            LoadFWIPlayerLogsWorker LoadZipFilesWorker = new LoadFWIPlayerLogsWorker();
+            LoadFWIPlayerLogsWorker LoadFWIPlayerLogsWorker = new LoadFWIPlayerLogsWorker();
             try
             {
                 log.Info("-----------------------------------------------------------------------------------------------------");
                 log.Info("LoadZipFilesJob Starting...");
-                await LoadZipFilesWorker.Work();
+                await LoadFWIPlayerLogsWorker.Work();
                 log.Info("LoadZipFilesJob Done!");
                 log.Info("-----------------------------------------------------------------------------------------------------");
             }
