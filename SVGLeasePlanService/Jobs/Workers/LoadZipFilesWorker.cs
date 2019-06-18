@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SVGLeasePlanService.Data;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
@@ -10,6 +11,7 @@ namespace SVGLeasePlanService.Jobs.Workers
 {
     public class LoadZipFilesWorker
     {
+        FWIContext _dbContect = new FWIContext();
         public async Task Work()
         {
             var zipPath = (@"C:\Temp\UnZipSource");
@@ -19,15 +21,19 @@ namespace SVGLeasePlanService.Jobs.Workers
             foreach (var z in zips)
             {
                 ZipFile.ExtractToDirectory(z, extractPath);
-
             }
 
-
             var logs = Directory.GetFiles(@extractPath, "*.log");
-            foreach (var log in logs)
+            using (var ctx = new FWIContext())
             {
-                ZipFile.ExtractToDirectory(z, extractPath);
-
+                foreach (var l in logs)
+                {
+                    var fi = new FileInfo(l);
+                    var sql = $@"INSERT INTO PLayerLogXML(XMLData, LoadedDateTime, Name)
+                        SELECT CONVERT(XML, BulkColumn) AS BulkColumn, GETDATE(),'{fi.Name}' 
+                        FROM OPENROWSET(BULK '{l}', SINGLE_BLOB) AS x;";
+                   ctx.Database.ExecuteSqlCommand(sql);
+                }
             }
 
         }

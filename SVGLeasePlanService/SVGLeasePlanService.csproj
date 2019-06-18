@@ -66,9 +66,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigureService.cs" />
+    <Compile Include="Data\FWIContext.cs" />
     <Compile Include="Data\LDBRepository.cs" />
     <Compile Include="Data\Models\Polygon.cs" />
     <Compile Include="Data\DTO\Space.cs" />
+    <Compile Include="Data\Models\PlayerLogXML.cs" />
     <Compile Include="Jobs\GenerateSVGJob.cs" />
     <Compile Include="Data\LDBContext.cs" />
     <Compile Include="Jobs\LoadZipFilesJob.cs" />
